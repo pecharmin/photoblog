@@ -17,7 +17,7 @@ if(!isset($PHOTOBLOG_IMAGE_SUFFIX) || count($PHOTOBLOG_IMAGE_SUFFIX)<1) $PHOTOBL
 
 <style>
 * { margin:0; padding:0; }
-body { padding:7vh 7vh 7vh 7vh; color:#080808; background:#fafafa; font-size:15pt; line-height:1.3em; font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif; }
+body { padding:7vh; color:#080808; background:#fafafa; font-size:15pt; line-height:1.3em; font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif; }
 
 .entry-title-image { float:left; }
 .entry-title-image img { max-height:86vh; width:auto; margin:0 2em 1em 0; }
@@ -32,6 +32,10 @@ body { padding:7vh 7vh 7vh 7vh; color:#080808; background:#fafafa; font-size:15p
 .entry-title-clearer { clear:both; height:0; }
 
 .entry-text { padding:0.9em 0.6em 0.3em 0.6em; /*background:#eaeaea;*/ background:rgba(234, 234, 234, 0.7); }
+
+.entry-image-box { clear:both; }
+.entry-image-box div { float:right; }
+.entry-image img { max-height:20vh; width:auto; padding:4vh 4vh 0 1vh; }
 
 .entry-vspacer { min-height:5em; clear:both; }
 
@@ -91,12 +95,22 @@ foreach($dir_list as $dir) {
 			print('</div>'); // entry-text
 		}
 
-		print('</div><div class="entry-vspacer">');
+
+
+		// print thumbnails of further images
+		if(count($images)>0) {
+			print('<div class="entry-image-box">');
+
+			foreach($images as $curr_image) {
+				print('<div class="entry-image"><img src="/' . $dir . '/' . $curr_image . '" /></div>');
+			}
+
+			print('</div>'); // entry-image-box
+		}
 
 		print('</div>'); // entry-content
 
-		//print_r("images: ");
-		//var_dump($images);
+		print('<div class="entry-vspacer">');
 
 		print('</div>'); // entry
 	}
